@@ -14,10 +14,9 @@ public class Task {
     //@Column(name = "desc") mogę tez nadać sam nazwę kolumny w tabeli (nadpisuje adnotację @Entity
 
     @NotBlank(message = "Task's description cannot be null")
+
     private String description;
-
     private boolean done;
-
 
     public Task() {
     }
