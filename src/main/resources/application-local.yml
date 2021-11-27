@@ -1,0 +1,12 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: '/console'
+  datasource:
+    username:
+    password:
+    url: 'jdbc:h2:file:C:/Users/jmoty/Documents/Programowanie/todoapp/todoapp/todoappdb'
+  jpa:
+      hibernate:
+        dll-auto: validate
