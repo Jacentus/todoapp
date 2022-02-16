@@ -19,9 +19,14 @@ public class TaskGroup {
     private Audit audit = new Audit();*/
     //@OneToMany(fetch = FetchType.LAZY) //informacja że jeden TaskGroup idzie do wielu Tasków.
     // Hibernate ma własne implementacje kolekcji (lista itp)! Fetch pozwala określić kiedy zaciągamy listę. Lista z Hibernate nie jest posortowana
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "group") //gdy usuwamy/dodajemy grupę to dzieje się to ze wszystkimi Taskami w grupie
     //@JoinColumn(name = "task_group_id")
     private Set<Task> tasks;
+
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private Project project;
 
     public TaskGroup() {
     }
@@ -51,11 +56,20 @@ public class TaskGroup {
         this.done = done;
     }
 
-    public Set<Task> getTasks() {
+    public Set<Task> getTasks() { //publiczny getter do seta z Taskami z danej grupy. Dochodzi do LazyLoadingu (fetchtype.Lazy, czyli dopiero gdy potrzebujemy tasków
+        // to hibernate generuje zapytanie SQL)
         return tasks;
     }
 
     public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
     }
 }

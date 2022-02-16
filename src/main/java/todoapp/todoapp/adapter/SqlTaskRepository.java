@@ -1,9 +1,11 @@
-package todoapp.todoapp.model;
+package todoapp.todoapp.adapter;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import todoapp.todoapp.model.Task;
+import todoapp.todoapp.model.TaskRepository;
 
 //klasa do komunikacji z bazą danych. Coś ala API, punkt wejścia do działania na kolekcji (w tym przypadku tasków)
 //interfejs dziedziczący po interfejsie z pakietu JPARepository, specyfikajca Javy jak podejść do ORM (obiect relational mapping)
@@ -24,6 +26,10 @@ interface SqlTaskRepository extends TaskRepository, JpaRepository<Task, Integer>
     @Override//metoda existsbyID jest nadpisywana TaskRepository, wykonuje się query natywne SQL.
     @Query(nativeQuery = true, value = "select count(*) > 0 from tasks where id=:id") //adnotacja springowa, pozwala korzystac z "czystego" SQL. Dwukropek ID - dzięki temu możemy używać @Param. Mając SELECT* moglibyśmy zwracać obiekt klasy Task!!!
     boolean existsById(@Param("id")Integer id);
+
+    @Override
+    boolean existsByDoneIsFalseAndGroup_Id(Integer group_id); //sygnatura metody którą udostępniamy w naszym kontrakcie
+
 } //dzięki dodaniu TaskRepository w extends Spring wie, że przywołując TaskRepository idziemy do Bean'a Springowego SQLTaskRepository
 
 

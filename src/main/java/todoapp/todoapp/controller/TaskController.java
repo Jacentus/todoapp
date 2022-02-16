@@ -17,7 +17,7 @@ import java.util.List;
 /*@RepositoryRestController*/
 //powiązanie klasy z istniejącym reporyztorium. Obiekty tych klas są zarządzane przez Springa. Skanuje klasy aby znaleźć powiązania.
 
-@RestController
+@RestController //pod spodem @Controller, niżej @Component. SPRING MA KONTEKST - MIEJSCE, GDZIE ZNAJDUJĄ SIE WSZYSTKIE BEAN'Y.
 class TaskController {
 
     private static final Logger logger = LoggerFactory.getLogger(TaskController.class); //ta fabryka logów będzie tworzyła logi z klasy taskcontroller

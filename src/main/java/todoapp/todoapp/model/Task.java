@@ -40,7 +40,10 @@ public class Task /*extends BaseAuditableEntity*/{
     Task() {
     } //konstruktor potrzebny hibernate'owi.
 
-
+    public Task(String description, LocalDateTime deadline){
+        this.description = description;
+        this.deadline = deadline;
+    }
 
     public void updateFrom(final Task source){
         description = source.description;
